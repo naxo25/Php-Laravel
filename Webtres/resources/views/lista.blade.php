@@ -19,7 +19,7 @@
 				</tr>
 				@foreach ($personas as $item)				
 				<tr>
-					<td><img src="{{asset($item->Foto)}}" width="44px" height="44px" style="border-radius:50%" /></td>
+					<td><img src="{{asset('storage').'/'.$item->Foto}}" width="44px" height="44px" style="border-radius:50%" /></td>
 					<td>{{$item->Nombres}}</td>
 					<td>{{$item->ApellidoPaterno}}</td>
 					<td>{{$item->ApellidoMaterno}}</td>
@@ -29,7 +29,7 @@
 
 					<td><a href="{{route('editar', $item->Id)}}"><button class="btn btn"  style="color: blue; padding: 0">Editar</button></a></td>
 					<td>
-					<form action="{{route('eliminar', $item->Id) }}" method="POST">
+					<form action="{{route('eliminar', $item->Id) }}" method="POST" enctype="multipart/form-data">
 						@csrf
 						@method('DELETE')
       					<button type="submit" class="btn btn" id="eliminar_btn" style="color: red; padding: 0px">Eliminar</button>

@@ -1,13 +1,18 @@
 @extends('index')
 
 @section('content')
+
+
             <div class="col-md-6 mx-auto p-4">
                 <h5 class="pt-4"> Crear/Editar </h5>
-                    <form action="{{route('store')}}" method="POST">
+                    <form action="{{route('store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                         <div class="form-group">
                             <input type="text" name="Nombres" class="form-control" placeholder="Nombres" autofocus required>
+                            <div class="">
+                                
+                            </div>
                         </div>
                         <div class="form-row form-group">
                             <div class='col-md-6'>

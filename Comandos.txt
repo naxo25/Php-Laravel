@@ -1,0 +1,11 @@
+composer create-project laravel/laravel newProyecto "5.8.*"
+
+php artisan make:model personas -cmr
+
+editar las migraciones como en el ej
+
+php artisan migrate para subir a la bd 
+
+php artisan storage:link
+
+php artisan serve -> puerto 8000
