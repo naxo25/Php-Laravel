@@ -42,18 +42,13 @@ class PersonasController extends Controller
      */
     public function store(Request $request)
     {
-        $datosPersona = new personas;
-        //$datos = request()->except('_token');
-        //personas::insert($datos);
-        $datosPersona-> Nombres = $request-> Nombres;
-        $datosPersona-> ApellidoPaterno = $request-> ApellidoPaterno;
-        $datosPersona-> ApellidoMaterno = $request-> ApellidoMaterno;
-        $datosPersona-> Rut = $request-> Rut;
-        $datosPersona-> FechadeNacimiento = $request-> FechadeNacimiento;
-        $datosPersona-> email = $request-> email;
-        $datosPersona-> Contrasena = $request-> Contrasena;
-        $datosPersona-> save();
-        return back()->with('agregar', 'La nota se ha agregado');
+        $datos = request()->except('_token');
+        
+        if ($request->hasFile('Foto')) {
+            $datos['Foto']=$request->file('Foto')->store('imagenes','public');
+        }
+        personas::insert($datos);
+        return redirect()->route('index')->with('etiqueta', 'El usuario ha sido Agregado');
     }
 
     /**
@@ -89,8 +84,13 @@ class PersonasController extends Controller
     public function update(Request $request, $Id)
     {
         $datos = request()->except(['_token', '_method']);
+        
+        if ($request->hasFile('Foto')) {
+            $datos['Foto']=$request->file('Foto')->store('imagenes','public');
+        }
+
         personas::where('Id','=',$Id)->update($datos);
-        return back()->with('update', 'La nota se ha actualizado');
+        return redirect()->route('index')->with('etiqueta', 'El usuario ha sido editado');
     }
 
     /**
@@ -101,7 +101,7 @@ class PersonasController extends Controller
      */
     public function destroy($Id)
     {
-        personas::destroy($Id);  
-        return back();
+        personas::where('Id','=',$Id)->delete($Id); 
+        return redirect()->route('index')->with('etiqueta', 'El usuario ha sido Eliminado');
     }
 }

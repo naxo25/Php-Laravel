@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <input type="password" name="Contrasena" class="form-control" placeholder="Contrasena" required value="{{$personaActualizar->Contrasena}}">
                         </div>
-                            <input hidden type="file" id="subirFoto" accept="image/*">
+                            <input hidden type="file" id="subirFoto" accept="image/*" name="Foto">
                             <button class="btn btn-grey btn-block" type="button" onclick="subirFoto.click()">
                                 Subir foto de perfil
                             </button>
@@ -40,10 +40,5 @@
                                 Guardar
                             </button>
                     </form>
-                @if (session('update'))
-                    <div class="alert alert-success mt-3">
-                        {{session('update')}}
-                    </div>
-                @endif
             </div>
 @endsection

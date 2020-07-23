@@ -9,6 +9,7 @@
 			</div>			
 			<table class="table mt-2 border-0">
 				<tr>
+					<th></th>
 					<th>NOMBRES</th>
 					<th>APELLIDO PATERNO</th>
 					<th>APELLIDO MATERNO</th>
@@ -18,6 +19,7 @@
 				</tr>
 				@foreach ($personas as $item)				
 				<tr>
+					<td><img src="{{asset($item->Foto)}}" width="44px" height="44px" style="border-radius:50%" /></td>
 					<td>{{$item->Nombres}}</td>
 					<td>{{$item->ApellidoPaterno}}</td>
 					<td>{{$item->ApellidoMaterno}}</td>
@@ -25,25 +27,24 @@
 					<td>{{$item->FechadeNacimiento}}</td>
 					<td>{{$item->email}}</td>
 
-					<td><a href="{{route('editar', $item->Id)}}" style="color: blue">Editar</a></td>
-					<td><a href="{{route('editar', $item->Id)}}" style="color: red">Eliminar</a></td>
-					<td hidden>
+					<td><a href="{{route('editar', $item->Id)}}"><button class="btn btn"  style="color: blue; padding: 0">Editar</button></a></td>
+					<td>
 					<form action="{{route('eliminar', $item->Id) }}" method="POST">
 						@csrf
 						@method('DELETE')
-      					<button type="submit">Eliminar</button>
+      					<button type="submit" class="btn btn" id="eliminar_btn" style="color: red; padding: 0px">Eliminar</button>
 					</form>
 					</td>
 				</tr>
 				@endforeach
 			</table>
+			@if (session('etiqueta'))
+                <div class="alert alert-success mt-3">
+                    {{session('etiqueta')}}
+            	</div>
+            @endif
 			{{$personas->links()}}
 
-                @if (session('eliminar'))
-                    <div class="alert alert-success mt-3">
-                        {{session('eliminar')}}
-                    </div>
-                @endif
 		</div>
 	</div>
 @endsection
